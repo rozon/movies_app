@@ -8,12 +8,7 @@ class MoviesProvider {
   String _url = 'api.themoviedb.org';
   String _language = 'en-US';
 
-  Future<List<Movie>> getNowPlaying() async {
-    final url = Uri.https(_url, "$_apiVersion/movie/now_playing", {
-      "api_key": _apiKey,
-      "language": _language,
-    });
-
+  Future<List<Movie>> processResponse(Uri url) async {
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -24,5 +19,21 @@ class MoviesProvider {
       print('Request failed with status: ${response.statusCode}.');
       return [];
     }
+  }
+
+  Future<List<Movie>> getNowPlaying() async {
+    final url = Uri.https(_url, "$_apiVersion/movie/now_playing", {
+      "api_key": _apiKey,
+      "language": _language,
+    });
+    return processResponse(url);
+  }
+
+  Future<List<Movie>> getPopular() async {
+    final url = Uri.https(_url, "$_apiVersion/movie/popular", {
+      "api_key": _apiKey,
+      "language": _language,
+    });
+    return processResponse(url);
   }
 }
