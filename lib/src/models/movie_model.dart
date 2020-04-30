@@ -70,4 +70,12 @@ class Movie {
       return 'http://image.tmdb.org/t/p/w500/$posterPath';
     }
   }
+
+  String getBackdropPath() {
+    if (backdropPath == null) {
+      return 'https://www.freeiconspng.com/uploads/no-image-icon-6.png';
+    } else {
+      return 'http://image.tmdb.org/t/p/w500/$backdropPath';
+    }
+  }
 }

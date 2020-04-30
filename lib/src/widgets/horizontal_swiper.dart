@@ -35,7 +35,7 @@ class HorizontalSwiper extends StatelessWidget {
   }
 
   Widget _card(BuildContext context, Movie movie) {
-    return Container(
+    final card = Container(
       margin: EdgeInsets.only(right: 15.0),
       child: Column(
         children: <Widget>[
@@ -56,6 +56,13 @@ class HorizontalSwiper extends StatelessWidget {
           ),
         ],
       ),
+    );
+
+    return GestureDetector(
+      child: card,
+      onTap: () {
+        Navigator.of(context).pushNamed('detail', arguments: movie);
+      },
     );
   }
 }
