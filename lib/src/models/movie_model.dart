@@ -1,8 +1,6 @@
 class Movies {
   List<Movie> items = List();
 
-  Movies();
-
   Movies.fromJsonList(List<dynamic> jsonList) {
     if (jsonList == null) return;
 

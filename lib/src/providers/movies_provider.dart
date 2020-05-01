@@ -1,7 +1,8 @@
-import 'package:movies_app/src/models/movie_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
+import 'package:movies_app/src/models/movie_model.dart';
+import 'package:movies_app/src/models/actor_model.dart';
 
 class MoviesProvider {
   String _apiVersion = '3';
@@ -63,5 +64,23 @@ class MoviesProvider {
 
     _loading = false;
     return response;
+  }
+
+  Future<List<Actor>> getCast(String movieId) async {
+    final url = Uri.https(_url, "$_apiVersion/movie/$movieId/credits", {
+      "api_key": _apiKey,
+      "language": _language,
+    });
+
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final parsedResponse = json.decode(response.body);
+      final Cast cast = Cast.fromJsonList(parsedResponse['cast']);
+      return cast.items;
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+      return [];
+    }
   }
 }

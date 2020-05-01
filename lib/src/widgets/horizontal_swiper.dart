@@ -39,16 +39,19 @@ class HorizontalSwiper extends StatelessWidget {
       margin: EdgeInsets.only(right: 15.0),
       child: Column(
         children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
-            child: FadeInImage(
-              fit: BoxFit.cover,
-              height: 160.0,
-              placeholder: AssetImage('assets/img/no-image.jpg'),
-              image: NetworkImage(movie.getPosterPath()),
+          Hero(
+            tag: movie.id,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: FadeInImage(
+                fit: BoxFit.cover,
+                height: 160.0,
+                placeholder: AssetImage('assets/img/no-image.jpg'),
+                image: NetworkImage(movie.getPosterPath()),
+              ),
             ),
           ),
-          SizedBox(height: 5.0),
+          SizedBox(height: 2.0),
           Text(
             movie.title,
             style: Theme.of(context).textTheme.caption,
